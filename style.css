@@ -1,0 +1,142 @@
+:root {
+    --dark-color: #232323;
+    --emote-color: hsl(50, 85%, 65%);
+/*  
+    Feel free to change the variable '--toggle-width' in order to scale toggle size with absolute and relative units ^-^  
+*/
+    --toggle-width: 250px;
+/*     --toggle-width: 20vw; */
+    --toggle-height: calc(var(--toggle-width) * .65);
+    --toggle-color: #F4F4F4;
+
+    --emote-size: calc(var(--toggle-height) * .85);
+    --emote-parts-color: hsl(15, 45%, 35%);
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: var(--dark-color);
+}
+.align-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.toggle-container {
+    width: var(--toggle-width);
+    height: var(--toggle-height);
+    background-color: var(--toggle-color);
+    cursor: pointer;
+}
+.toggle-container::before, 
+.toggle-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: inherit;
+    width: var(--toggle-height);
+    background-color: inherit;
+    border-radius: 50%;
+    z-index: -1;
+}
+.toggle-container::before {
+    left: -50%;
+    transform: translateX(25%);
+}
+.toggle-container::after {
+    right: -50%;
+    transform: translateX(-25%);
+}
+.toggle-container > input[type="checkbox"] {
+    display: none;
+}
+.toggle-container > input[type="checkbox"]:checked + .emote {
+    left: calc(var(--toggle-width) * .73);
+}
+.toggle-container > input[type="checkbox"]:checked + .emote .mouth::after {
+    bottom: calc(var(--emote-size) / -27.625);
+}
+.toggle-container > input[type="checkbox"]:checked + .emote .eye::after {
+    width: calc(var(--emote-size) / 5);
+    height: calc(var(--emote-size) / 25);
+    top: calc(var(--emote-size) / -17.265625);
+    opacity: 1;
+}
+.toggle-container > input[type="checkbox"]:checked + .emote .eye.left::after {
+    left: calc(var(--emote-size) / 27.625);
+}
+.toggle-container > input[type="checkbox"]:checked + .emote .eye.right::after {
+    right: calc(var(--emote-size) / 27.625);
+}
+.toggle-container > .emote {
+    position: absolute;
+    top: 50%;
+    left: calc(calc(var(--toggle-height) * .42) - var(--emote-size));
+    transform: translateY(-50%);
+    width: var(--emote-size);
+    height: var(--emote-size);
+    background-color: var(--emote-color);
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 500ms ease;
+}
+.toggle-container > .emote .eye {
+    position: absolute;
+    top: calc(var(--emote-size) / 4.60416);
+    width: calc(var(--emote-size) / 5.525);
+    height: calc(var(--emote-size) / 5.525);
+    background-color: var(--emote-parts-color);
+    border-radius: 50%;
+}
+.toggle-container > .emote .eye::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--emote-size) / 10);
+    height: calc(var(--emote-size) / 15);
+    transform: rotate(30deg);
+    background-color: inherit;
+    top: calc(var(--emote-size) / 20);
+    border-radius: 5px;
+    transition: all 500ms ease;
+}
+.toggle-container > .emote .eye.left::after {
+    left: 0px;
+}
+.toggle-container > .emote .eye.right::after {
+    right: 0px;
+    transform: rotate(-30deg);
+}
+.emote .eye.left {
+    left: calc(var(--emote-size) / 6.90625);
+}
+.emote .eye.right {
+    right: calc(var(--emote-size) / 6.90625);
+}
+.emote .mouth {
+    height: calc(var(--emote-size) * .7);
+    width: calc(var(--emote-size) * .7);
+    background-color: var(--emote-parts-color);
+    border-radius: 50%;
+    z-index: -2;
+    transition: all 500ms ease;
+}
+.emote .mouth::before,
+.emote .mouth::after {
+    content: '';
+    position: absolute;
+    left: -1%;
+    width: calc(var(--emote-size) * .72);
+    height: calc(var(--emote-size) * .35);
+    background-color: var(--emote-color);
+    transition: all 500ms ease;
+}
+.emote .mouth::after {
+    left: 50%;
+    bottom: calc(var(--emote-size) / -3.069);
+    transform: translate(-50%);
+    width: calc(var(--emote-size) * .7 * 1.05);
+    height: calc(var(--emote-size) * .31);
+}
